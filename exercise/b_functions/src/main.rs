@@ -35,14 +35,13 @@ fn main() {
     //
     // Uncomment and run the code below to see the error. Fix the error by setting countdown to 0
     // in the `else` branch of the `if` expression. Run the code. You should see a countdown of 10.
-
-    let countdown: i32; // declares countdown, but doesn't initialize it
-    if answer < 100 {
-        countdown = 10;
+    // declares countdown, but doesn't initialize it
+    let countdown: i32 = if answer < 100 {
+        10
     } else {
         println!("The answer is clearly wrong.");
-        countdown = 0;
-    }
+        0
+    };
     println!("The countdown begins at {}", countdown);
 }
 
