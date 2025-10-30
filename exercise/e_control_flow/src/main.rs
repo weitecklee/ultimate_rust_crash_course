@@ -15,6 +15,19 @@ fn main() {
 
     // (write your `loop` here)
 
+    // loop {
+    //     count += 1;
+    //     bunnies *= 2;
+    //     if bunnies > 500 {
+    //         break;
+    //     }
+    // }
+
+    while bunnies <= 500 {
+        count += 1;
+        bunnies *= 2;
+    }
+
     println!(
         "Bunnies doubled {} times before there were more than 500",
         count
@@ -26,6 +39,18 @@ fn main() {
     let mut sum = 0;
 
     // (write the `for` loop here)
+
+    // for n in 7..24 {
+    //     sum += n;
+    // }
+    let mut n = 7;
+    loop {
+        sum += n;
+        n += 1;
+        if n > 23 {
+            break;
+        }
+    }
 
     println!("The sum is {}", sum);
 
@@ -44,6 +69,15 @@ fn main() {
 
     // (write the `while` loop here)
 
+    // while fives.len() < 12 {
+    //     fives.push(number);
+    //     number += 5;
+    // }
+
+    for i in 1..13 {
+        fives.push(5 * i)
+    }
+
     println!("Here are the first 12 multiples of 5: {:?}", fives);
 
     // 4. Use `if`, `else if` and `else` inside the `for` loop below to do the following:
@@ -58,6 +92,13 @@ fn main() {
     let numbers = vec![0, 1, 2, 3, 4, 5];
     for number in numbers {
         // (write your `if/else` expression here)
+        total += if number == 0 {
+            7
+        } else if number == 1 || number == 2 {
+            30
+        } else {
+            -5
+        };
     }
 
     println!("The total is {}", total);
