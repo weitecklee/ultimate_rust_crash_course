@@ -25,8 +25,6 @@
 //
 //     let positive_number: u32 = some_string.parse().expect("Failed to parse a number");
 
-use rand;
-
 fn main() {
     // 1. First, you need to implement some basic command-line argument handling
     // so you can make your program do different things.  Here's a little bit
@@ -208,12 +206,11 @@ fn rotate(value: u32, infile: String, outfile: String) {
     // Challenge: parse the rotation amount from the command-line, pass it
     // through to this function to select which method to call.
     let img = image::open(infile).expect("Failed to open INFILE.");
-    let img2;
-    match value {
-        90 => img2 = img.rotate90(),
-        270 => img2 = img.rotate270(),
-        _ => img2 = img.rotate180(),
-    }
+    let img2 = match value {
+        90 => img.rotate90(),
+        270 => img.rotate270(),
+        _ => img.rotate180(),
+    };
     img2.save(outfile).expect("Failed writing OUTFILE.");
 }
 
@@ -246,12 +243,19 @@ fn generate(outfile: String) {
     let width = 800;
     let height = 800;
 
-    let red = rand::random::<u8>();
-    let green = rand::random::<u8>();
-    let blue = rand::random::<u8>();
+    let red_0 = rand::random::<u8>();
+    let green_0 = rand::random::<u8>();
+    let blue_0 = rand::random::<u8>();
+    let red_1 = rand::random::<u8>();
+    let green_1 = rand::random::<u8>();
+    let blue_1 = rand::random::<u8>();
 
     let mut imgbuf = image::ImageBuffer::new(width, height);
-    for (_, _, pixel) in imgbuf.enumerate_pixels_mut() {
+    for (x, y, pixel) in imgbuf.enumerate_pixels_mut() {
+        let t = (x + y) as f32 / (width + height - 2) as f32;
+        let red = (red_0 as f32 + (t * (red_1 - red_0) as f32)) as u8;
+        let green = (green_0 as f32 + (t * (green_1 - green_0) as f32)) as u8;
+        let blue = (blue_0 as f32 + (t * (blue_1 - blue_0) as f32)) as u8;
         *pixel = image::Rgb([red, green, blue]);
     }
 
